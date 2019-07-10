@@ -27,7 +27,7 @@ namespace InventarioAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
         {
-            var categorias = await contexto.Categorias.ToListAsync();
+            var categorias = await contexto.Categorias.Include("Productos").ToListAsync();
             var categoriasDTO = mapper.Map<List<CategoriaDTO>>(categorias);
             return categoriasDTO;
         }
@@ -54,6 +54,32 @@ namespace InventarioAPI.Controllers
             var categoriaDTO = mapper.Map<CategoriaDTO>(categoria);
             return new CreatedAtRouteResult("GetCategoria", new { id = categoria.CodigoCategoria },
                 categoriaDTO);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int  id, [FromBody] CategoriaCreacionDTO categoriaActualizacion)
+        {
+            var categoria = mapper.Map<Categoria>(categoriaActualizacion);
+            categoria.CodigoCategoria = id;
+            contexto.Entry(categoria).State = EntityState.Modified;
+            await contexto.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<CategoriaDTO>> Delete(int id)
+        {
+            var codigoCategoria = await contexto.Categorias.Select(x => x.CodigoCategoria)
+                .FirstOrDefaultAsync(x => x == id);
+            if (codigoCategoria == default(int))
+            {
+                return NotFound();
+            }
+            contexto.Remove(new Categoria { CodigoCategoria = id });
+            await contexto.SaveChangesAsync();
+            return NoContent();
+
+                
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventarioAPI.Migrations
 {
     [DbContext(typeof(InventarioDBContext))]
-    [Migration("20190618025315_categoria_tipoEmpaque")]
-    partial class categoria_tipoEmpaque
+    [Migration("20190710010320_Entidades")]
+    partial class Entidades
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,9 +37,8 @@ namespace InventarioAPI.Migrations
 
             modelBuilder.Entity("InventarioAPI.Entities.Cliente", b =>
                 {
-                    b.Property<int>("Nit")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Nit")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Direccion");
 
@@ -128,7 +127,7 @@ namespace InventarioAPI.Migrations
                     b.Property<string>("Nit")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClienteNit");
+                    b.Property<string>("ClienteNit");
 
                     b.Property<int>("CodigoEmail");
 
@@ -166,8 +165,6 @@ namespace InventarioAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteNit");
-
                     b.Property<DateTime>("Fecha");
 
                     b.Property<string>("Nit");
@@ -176,7 +173,7 @@ namespace InventarioAPI.Migrations
 
                     b.HasKey("Numerofactura");
 
-                    b.HasIndex("ClienteNit");
+                    b.HasIndex("Nit");
 
                     b.ToTable("Facturas");
                 });
@@ -217,6 +214,16 @@ namespace InventarioAPI.Migrations
                     b.Property<int>("CodigoEmpaque");
 
                     b.Property<string>("Descripcion");
+
+                    b.Property<int>("Existencia");
+
+                    b.Property<string>("Imagen");
+
+                    b.Property<decimal>("PrecioPorDocena");
+
+                    b.Property<decimal>("PrecioPorMayor");
+
+                    b.Property<decimal>("PrecioUnitario");
 
                     b.HasKey("CodigoProducto");
 
@@ -267,8 +274,6 @@ namespace InventarioAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteNit");
-
                     b.Property<string>("Descripcion");
 
                     b.Property<string>("Nit");
@@ -277,7 +282,7 @@ namespace InventarioAPI.Migrations
 
                     b.HasKey("CodigoTelefono");
 
-                    b.HasIndex("ClienteNit");
+                    b.HasIndex("Nit");
 
                     b.ToTable("TelefonoClientes");
                 });
@@ -410,7 +415,7 @@ namespace InventarioAPI.Migrations
                 {
                     b.HasOne("InventarioAPI.Entities.Cliente", "Cliente")
                         .WithMany("Facturas")
-                        .HasForeignKey("ClienteNit");
+                        .HasForeignKey("Nit");
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.Inventario", b =>
@@ -438,7 +443,7 @@ namespace InventarioAPI.Migrations
                 {
                     b.HasOne("InventarioAPI.Entities.Cliente", "Cliente")
                         .WithMany("TelefonoClientes")
-                        .HasForeignKey("ClienteNit");
+                        .HasForeignKey("Nit");
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.TelefonoProveedor", b =>

@@ -1,22 +1,21 @@
-﻿using System;
+﻿using InventarioAPI.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InventarioAPI.Entities
+namespace InventarioAPI.Models
 {
-    public class Producto
+    public class ProductoDTO
     {
         public int CodigoProducto { get; set; }
         public int CodigoCategoria { get; set; }
         public int CodigoEmpaque { get; set; }
 
-        
-        public Categoria Categoria { get; set; }
-        public TipoEmpaque TipoEmpaque { get; set; }
-        public List<Inventario> Inventarios { get; set; }
-        public List<DetalleCompra> DetalleCompras { get; set; }
-        public List<DetalleFactura> DetalleFacturas { get; set; }
+
+        public CategoriaDTO Categoria { get; set; }
+        public TipoEmpaqueDTO TipoEmpaque { get; set; }
+
         public string Descripcion { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal PrecioPorDocena { get; set; }

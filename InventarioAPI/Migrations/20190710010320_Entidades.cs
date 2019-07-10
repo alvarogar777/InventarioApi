@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InventarioAPI.Migrations
 {
-    public partial class categoria_tipoEmpaque : Migration
+    public partial class Entidades : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,8 +25,7 @@ namespace InventarioAPI.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    Nit = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nit = table.Column<string>(nullable: false),
                     Dpi = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
                     Direccion = table.Column<string>(nullable: true)
@@ -104,7 +103,7 @@ namespace InventarioAPI.Migrations
                     CodigoEmail = table.Column<int>(nullable: false),
                     email = table.Column<string>(nullable: true),
                     Nit = table.Column<string>(nullable: false),
-                    ClienteNit = table.Column<int>(nullable: true)
+                    ClienteNit = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -125,15 +124,14 @@ namespace InventarioAPI.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nit = table.Column<string>(nullable: true),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false),
-                    ClienteNit = table.Column<int>(nullable: true)
+                    Total = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Facturas", x => x.Numerofactura);
                     table.ForeignKey(
-                        name: "FK_Facturas_Clientes_ClienteNit",
-                        column: x => x.ClienteNit,
+                        name: "FK_Facturas_Clientes_Nit",
+                        column: x => x.Nit,
                         principalTable: "Clientes",
                         principalColumn: "Nit",
                         onDelete: ReferentialAction.Restrict);
@@ -147,15 +145,14 @@ namespace InventarioAPI.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Numero = table.Column<string>(nullable: true),
                     Descripcion = table.Column<string>(nullable: true),
-                    Nit = table.Column<string>(nullable: true),
-                    ClienteNit = table.Column<int>(nullable: true)
+                    Nit = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TelefonoClientes", x => x.CodigoTelefono);
                     table.ForeignKey(
-                        name: "FK_TelefonoClientes_Clientes_ClienteNit",
-                        column: x => x.ClienteNit,
+                        name: "FK_TelefonoClientes_Clientes_Nit",
+                        column: x => x.Nit,
                         principalTable: "Clientes",
                         principalColumn: "Nit",
                         onDelete: ReferentialAction.Restrict);
@@ -234,7 +231,12 @@ namespace InventarioAPI.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CodigoCategoria = table.Column<int>(nullable: false),
                     CodigoEmpaque = table.Column<int>(nullable: false),
-                    Descripcion = table.Column<string>(nullable: true)
+                    Descripcion = table.Column<string>(nullable: true),
+                    PrecioUnitario = table.Column<decimal>(nullable: false),
+                    PrecioPorDocena = table.Column<decimal>(nullable: false),
+                    PrecioPorMayor = table.Column<decimal>(nullable: false),
+                    Existencia = table.Column<int>(nullable: false),
+                    Imagen = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -397,9 +399,9 @@ namespace InventarioAPI.Migrations
                 column: "ProveedorCodigoProveedor");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Facturas_ClienteNit",
+                name: "IX_Facturas_Nit",
                 table: "Facturas",
-                column: "ClienteNit");
+                column: "Nit");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inventarios_CodigoProducto",
@@ -417,9 +419,9 @@ namespace InventarioAPI.Migrations
                 column: "CodigoEmpaque");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TelefonoClientes_ClienteNit",
+                name: "IX_TelefonoClientes_Nit",
                 table: "TelefonoClientes",
-                column: "ClienteNit");
+                column: "Nit");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TelefonoProveedores_ProveedoresCodigoProveedor",

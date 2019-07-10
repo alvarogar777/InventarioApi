@@ -26,3 +26,17 @@ C:\Users\usuario\Documents\Visual Studio 2015\Projects\InventarioAPI-master\Inve
 C:\Users\usuario\Documents\Visual Studio 2015\Projects\InventarioAPI-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.RazorTargetAssemblyInfo.cache
 C:\Users\usuario\Documents\Visual Studio 2015\Projects\InventarioAPI-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.dll
 C:\Users\usuario\Documents\Visual Studio 2015\Projects\InventarioAPI-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.pdb
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\bin\Debug\netcoreapp2.1\InventarioAPI.deps.json
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\bin\Debug\netcoreapp2.1\InventarioAPI.runtimeconfig.json
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\bin\Debug\netcoreapp2.1\InventarioAPI.runtimeconfig.dev.json
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\bin\Debug\netcoreapp2.1\InventarioAPI.dll
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\bin\Debug\netcoreapp2.1\InventarioAPI.pdb
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.csprojAssemblyReference.cache
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.csproj.CoreCompileInputs.cache
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.RazorAssemblyInfo.cache
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.RazorAssemblyInfo.cs
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.AssemblyInfoInputs.cache
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.AssemblyInfo.cs
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.RazorTargetAssemblyInfo.cache
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.dll
+C:\Users\Programacion\Documents\Visual Studio 2015\Projects\InventarioApi-master\InventarioAPI\obj\Debug\netcoreapp2.1\InventarioAPI.pdb
