@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InventarioAPI.Migrations
 {
-    public partial class Entidades : Migration
+    public partial class Identidades : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,17 +100,17 @@ namespace InventarioAPI.Migrations
                 name: "Emailclientes",
                 columns: table => new
                 {
-                    CodigoEmail = table.Column<int>(nullable: false),
+                    CodigoEmail = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     email = table.Column<string>(nullable: true),
-                    Nit = table.Column<string>(nullable: false),
-                    ClienteNit = table.Column<string>(nullable: true)
+                    Nit = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Emailclientes", x => x.Nit);
+                    table.PrimaryKey("PK_Emailclientes", x => x.CodigoEmail);
                     table.ForeignKey(
-                        name: "FK_Emailclientes_Clientes_ClienteNit",
-                        column: x => x.ClienteNit,
+                        name: "FK_Emailclientes_Clientes_Nit",
+                        column: x => x.Nit,
                         principalTable: "Clientes",
                         principalColumn: "Nit",
                         onDelete: ReferentialAction.Restrict);
@@ -184,43 +184,41 @@ namespace InventarioAPI.Migrations
                 name: "EmailProveedor",
                 columns: table => new
                 {
-                    CodigoEmail = table.Column<int>(nullable: false),
+                    CodigoEmail = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(nullable: true),
                     CodigoProveedor = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProveedorCodigoProveedor = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmailProveedor", x => x.CodigoProveedor);
+                    table.PrimaryKey("PK_EmailProveedor", x => x.CodigoEmail);
                     table.ForeignKey(
-                        name: "FK_EmailProveedor_Proveedores_ProveedorCodigoProveedor",
-                        column: x => x.ProveedorCodigoProveedor,
+                        name: "FK_EmailProveedor_Proveedores_CodigoProveedor",
+                        column: x => x.CodigoProveedor,
                         principalTable: "Proveedores",
                         principalColumn: "CodigoProveedor",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TelefonoProveedores",
                 columns: table => new
                 {
-                    CodigoTelefono = table.Column<int>(nullable: false),
+                    CodigoTelefono = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Numero = table.Column<string>(nullable: true),
                     Descripcion = table.Column<string>(nullable: true),
                     CodigoProveedor = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProveedoresCodigoProveedor = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TelefonoProveedores", x => x.CodigoProveedor);
+                    table.PrimaryKey("PK_TelefonoProveedores", x => x.CodigoTelefono);
                     table.ForeignKey(
-                        name: "FK_TelefonoProveedores_Proveedores_ProveedoresCodigoProveedor",
-                        column: x => x.ProveedoresCodigoProveedor,
+                        name: "FK_TelefonoProveedores_Proveedores_CodigoProveedor",
+                        column: x => x.CodigoProveedor,
                         principalTable: "Proveedores",
                         principalColumn: "CodigoProveedor",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -285,17 +283,16 @@ namespace InventarioAPI.Migrations
                 name: "DetalleCompras",
                 columns: table => new
                 {
-                    IdDetalle = table.Column<int>(nullable: false),
-                    IdCompra = table.Column<int>(nullable: false)
+                    IdDetalle = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdCompra = table.Column<int>(nullable: false),
                     CodigoProducto = table.Column<int>(nullable: false),
                     Cantidad = table.Column<int>(nullable: false),
-                    Precio = table.Column<decimal>(nullable: false),
-                    CompraIdCompra = table.Column<int>(nullable: true)
+                    Precio = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DetalleCompras", x => x.IdCompra);
+                    table.PrimaryKey("PK_DetalleCompras", x => x.IdDetalle);
                     table.ForeignKey(
                         name: "FK_DetalleCompras_Productos_CodigoProducto",
                         column: x => x.CodigoProducto,
@@ -303,11 +300,11 @@ namespace InventarioAPI.Migrations
                         principalColumn: "CodigoProducto",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DetalleCompras_Compras_CompraIdCompra",
-                        column: x => x.CompraIdCompra,
+                        name: "FK_DetalleCompras_Compras_IdCompra",
+                        column: x => x.IdCompra,
                         principalTable: "Compras",
                         principalColumn: "IdCompra",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -374,9 +371,9 @@ namespace InventarioAPI.Migrations
                 column: "CodigoProducto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetalleCompras_CompraIdCompra",
+                name: "IX_DetalleCompras_IdCompra",
                 table: "DetalleCompras",
-                column: "CompraIdCompra");
+                column: "IdCompra");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetalleFacturas_CodigoProducto",
@@ -389,14 +386,14 @@ namespace InventarioAPI.Migrations
                 column: "NumeroFactura");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Emailclientes_ClienteNit",
+                name: "IX_Emailclientes_Nit",
                 table: "Emailclientes",
-                column: "ClienteNit");
+                column: "Nit");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailProveedor_ProveedorCodigoProveedor",
+                name: "IX_EmailProveedor_CodigoProveedor",
                 table: "EmailProveedor",
-                column: "ProveedorCodigoProveedor");
+                column: "CodigoProveedor");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Facturas_Nit",
@@ -424,9 +421,9 @@ namespace InventarioAPI.Migrations
                 column: "Nit");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TelefonoProveedores_ProveedoresCodigoProveedor",
+                name: "IX_TelefonoProveedores_CodigoProveedor",
                 table: "TelefonoProveedores",
-                column: "ProveedoresCodigoProveedor");
+                column: "CodigoProveedor");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleID1",

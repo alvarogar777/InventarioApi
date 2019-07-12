@@ -42,13 +42,13 @@ namespace InventarioAPI.Contexts
             modelBuilder.Entity<Compra>().ToTable("Compras")
                 .HasKey(key => key.IdCompra);
             modelBuilder.Entity<DetalleCompra>().ToTable("DetalleCompras")
-                .HasKey(key => key.IdCompra);
+                .HasKey(key => key.IdDetalle);
             modelBuilder.Entity<DetalleFactura>().ToTable("DetalleFacturas")
                 .HasKey(key => key.CodigoDetalle);
             modelBuilder.Entity<Emailcliente>().ToTable("Emailclientes")
-                .HasKey(key => key.Nit);
+                .HasKey(key => key.CodigoEmail);
             modelBuilder.Entity<EmailProveedor>().ToTable("EmailProveedor")
-                .HasKey(key => key.CodigoProveedor);
+                .HasKey(key => key.CodigoEmail);
             modelBuilder.Entity<Factura>().ToTable("Facturas")
                 .HasKey(key => key.Numerofactura);
             modelBuilder.Entity<Inventario>().ToTable("Inventarios")
@@ -62,7 +62,7 @@ namespace InventarioAPI.Contexts
             modelBuilder.Entity<TelefonoCliente>().ToTable("TelefonoClientes")
                 .HasKey(key => key.CodigoTelefono);
             modelBuilder.Entity<TelefonoProveedor>().ToTable("TelefonoProveedores")
-                .HasKey(key => key.CodigoProveedor);
+                .HasKey(key => key.CodigoTelefono);
             modelBuilder.Entity<TipoEmpaque>().ToTable("TipoEmpaques")
                 .HasKey(key => key.CodigoEmpaque);
             modelBuilder.Entity<User>().ToTable("Users")

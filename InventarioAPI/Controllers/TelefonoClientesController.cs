@@ -26,7 +26,7 @@ namespace InventarioAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TelefonoClienteDTO>>> Get()
         {
-            var telefonoCliente = await contexto.Emailclientes.ToListAsync();
+            var telefonoCliente = await contexto.TelefonoClientes.ToListAsync();
             var telefonoClienteDTO = mapper.Map<List<TelefonoClienteDTO>>(telefonoCliente);
             return telefonoClienteDTO;
         }

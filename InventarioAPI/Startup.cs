@@ -42,6 +42,13 @@ namespace InventarioAPI
                 options.CreateMap<ProductoCreacionDTO, Producto>();
                 options.CreateMap<FacturaCreacionDTO, Factura>();
                 options.CreateMap<DetalleFacturaCreacionDTO, DetalleFactura>();
+                options.CreateMap<CompraCreacionDTO, Compra>();
+                options.CreateMap<DetalleCompraCreacionDTO, DetalleCompra>();
+                options.CreateMap<EmailClienteCreacionDTO, Emailcliente>();
+                options.CreateMap<EmailProveedorCreacionDTO, EmailProveedor>();
+                options.CreateMap<InventarioCreacionDTO, Inventario>();
+                options.CreateMap<TelefonoClienteCreacionDTO, TelefonoCliente>();
+                options.CreateMap<TelefonoProveedorCreacionDTO, TelefonoProveedor>();
             });
             services.AddDbContext<InventarioDBContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));

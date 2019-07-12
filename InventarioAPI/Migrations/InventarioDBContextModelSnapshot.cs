@@ -72,7 +72,7 @@ namespace InventarioAPI.Migrations
 
             modelBuilder.Entity("InventarioAPI.Entities.DetalleCompra", b =>
                 {
-                    b.Property<int>("IdCompra")
+                    b.Property<int>("IdDetalle")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -80,17 +80,15 @@ namespace InventarioAPI.Migrations
 
                     b.Property<int>("CodigoProducto");
 
-                    b.Property<int?>("CompraIdCompra");
-
-                    b.Property<int>("IdDetalle");
+                    b.Property<int>("IdCompra");
 
                     b.Property<decimal>("Precio");
 
-                    b.HasKey("IdCompra");
+                    b.HasKey("IdDetalle");
 
                     b.HasIndex("CodigoProducto");
 
-                    b.HasIndex("CompraIdCompra");
+                    b.HasIndex("IdCompra");
 
                     b.ToTable("DetalleCompras");
                 });
@@ -122,37 +120,34 @@ namespace InventarioAPI.Migrations
 
             modelBuilder.Entity("InventarioAPI.Entities.Emailcliente", b =>
                 {
-                    b.Property<string>("Nit")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("CodigoEmail")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClienteNit");
-
-                    b.Property<int>("CodigoEmail");
+                    b.Property<string>("Nit");
 
                     b.Property<string>("email");
 
-                    b.HasKey("Nit");
+                    b.HasKey("CodigoEmail");
 
-                    b.HasIndex("ClienteNit");
+                    b.HasIndex("Nit");
 
                     b.ToTable("Emailclientes");
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.EmailProveedor", b =>
                 {
-                    b.Property<int>("CodigoProveedor")
+                    b.Property<int>("CodigoEmail")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoEmail");
+                    b.Property<int>("CodigoProveedor");
 
                     b.Property<string>("Email");
 
-                    b.Property<int?>("ProveedorCodigoProveedor");
+                    b.HasKey("CodigoEmail");
 
-                    b.HasKey("CodigoProveedor");
-
-                    b.HasIndex("ProveedorCodigoProveedor");
+                    b.HasIndex("CodigoProveedor");
 
                     b.ToTable("EmailProveedor");
                 });
@@ -287,21 +282,19 @@ namespace InventarioAPI.Migrations
 
             modelBuilder.Entity("InventarioAPI.Entities.TelefonoProveedor", b =>
                 {
-                    b.Property<int>("CodigoProveedor")
+                    b.Property<int>("CodigoTelefono")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoTelefono");
+                    b.Property<int>("CodigoProveedor");
 
                     b.Property<string>("Descripcion");
 
                     b.Property<string>("Numero");
 
-                    b.Property<int?>("ProveedoresCodigoProveedor");
+                    b.HasKey("CodigoTelefono");
 
-                    b.HasKey("CodigoProveedor");
-
-                    b.HasIndex("ProveedoresCodigoProveedor");
+                    b.HasIndex("CodigoProveedor");
 
                     b.ToTable("TelefonoProveedores");
                 });
@@ -379,7 +372,8 @@ namespace InventarioAPI.Migrations
 
                     b.HasOne("InventarioAPI.Entities.Compra", "Compra")
                         .WithMany("DetalleCompras")
-                        .HasForeignKey("CompraIdCompra");
+                        .HasForeignKey("IdCompra")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.DetalleFactura", b =>
@@ -399,14 +393,15 @@ namespace InventarioAPI.Migrations
                 {
                     b.HasOne("InventarioAPI.Entities.Cliente", "Cliente")
                         .WithMany("Emailclientes")
-                        .HasForeignKey("ClienteNit");
+                        .HasForeignKey("Nit");
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.EmailProveedor", b =>
                 {
                     b.HasOne("InventarioAPI.Entities.Proveedor", "Proveedor")
                         .WithMany("EmailProveedores")
-                        .HasForeignKey("ProveedorCodigoProveedor");
+                        .HasForeignKey("CodigoProveedor")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.Factura", b =>
@@ -448,7 +443,8 @@ namespace InventarioAPI.Migrations
                 {
                     b.HasOne("InventarioAPI.Entities.Proveedor", "Proveedores")
                         .WithMany("TelefonoProveedores")
-                        .HasForeignKey("ProveedoresCodigoProveedor");
+                        .HasForeignKey("CodigoProveedor")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InventarioAPI.Entities.UserRole", b =>
